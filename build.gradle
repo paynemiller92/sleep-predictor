@@ -3,15 +3,30 @@ plugins {
     id "io.freefair.lombok" version "5.3.0"
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+group 'edu.uncc.cci.chbm'
+version '1.0'
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Sleep Predictor',
+                'Implementation-Version': version,
+                'Main-Class': 'SleepPredictor'
+    }
+    baseName = project.name
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    with jar
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compileOnly group: 'org.apache.spark', name: 'spark-mllib_2.12', version: '3.1.1'
+    implementation group: 'org.apache.spark', name: 'spark-mllib_2.12', version: '3.1.1'
+    implementation group: 'org.apache.spark', name: 'spark-core_2.12', version: '3.1.1'
+    implementation group: 'org.apache.spark', name: 'spark-sql_2.12', version: '3.1.1'
     compileOnly 'org.projectlombok:lombok:1.18.16'
     implementation group: 'org.apache.commons', name: 'commons-csv', version: '1.8'
     annotationProcessor 'org.projectlombok:lombok:1.18.16'

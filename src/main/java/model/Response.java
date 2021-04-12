@@ -2,13 +2,7 @@ package model;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.val;
-
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
-
 import org.apache.commons.csv.CSVRecord;
-
-import jdk.jfr.SettingDefinition;
 
 public class Response {
   @Getter
@@ -17,7 +11,7 @@ public class Response {
 
   @Getter
   @Setter
-  private int qs1;
+  private int weekDayBedtime;
 
   @Getter
   @Setter
@@ -49,7 +43,7 @@ public class Response {
 
   @Getter
   @Setter
-  private int q5;
+  private int averageHoursOfSleepPerWeekday;
 
   @Getter
   @Setter
@@ -253,7 +247,7 @@ public class Response {
 
   @Getter
   @Setter
-  private int q38;
+  private int averageHoursOfModerateExercisePerWeekday;
 
   @Getter
   @Setter
@@ -427,15 +421,15 @@ public class Response {
   public static Response fromCsvRecord(CSVRecord record) {
     Response response = new Response();
     response.setAge(readInteger(record, Field.AGE, DefaultValue.AGE));
-    response.setQs1(readInteger(record, Field.QS1, DefaultValue.QS1));
-    response.setQs2(readInteger(record, Field.QS2, DefaultValue.QS2));
+    response.setWeekDayBedtime(readInteger(record, Field.QS1, DefaultValue.QS1));
+    response.setQs2(readInteger(record, Field.WEEKDAY_AWAKE_TIME, DefaultValue.QS2));
     response.setQs3(readInteger(record, Field.QS3, DefaultValue.QS3));
     response.setQs4(readString(record, Field.QS4, DefaultValue.QS4));
-    response.setQ1(readInteger(record, Field.Q1, DefaultValue.Q1));
-    response.setQ2(readInteger(record, Field.Q2, DefaultValue.Q2));
+    response.setQ1(readInteger(record, Field.WEEKDAY_BEDTIME, DefaultValue.WEEKDAY_BEDTIME));
+    response.setQ2(readInteger(record, Field.Q2, DefaultValue.WEEK_DAY_AWAKE_TIME));
     response.setQ3(readInteger(record, Field.Q3, DefaultValue.Q3));
     response.setQ4(readInteger(record, Field.Q4, DefaultValue.Q4));
-    response.setQ5(readInteger(record, Field.Q5, DefaultValue.Q5));
+    response.setAverageHoursOfSleepPerWeekday(readInteger(record, Field.Q5, DefaultValue.Q5));
     response.setQ6(readInteger(record, Field.Q6, DefaultValue.Q6));
     response.setQ7(readInteger(record, Field.Q7, DefaultValue.Q7));
     response.setQ8(readInteger(record, Field.Q8, DefaultValue.Q8));
@@ -486,7 +480,7 @@ public class Response {
     response.setQ3701(readInteger(record, Field.Q3701, DefaultValue.Q3701));
     response.setQ3702(readInteger(record, Field.Q3702, DefaultValue.Q3702));
     response.setQ3703(readInteger(record, Field.Q3703, DefaultValue.Q3703));
-    response.setQ38(readInteger(record, Field.Q38, DefaultValue.Q38));
+    response.setAverageHoursOfModerateExercisePerWeekday(readInteger(record, Field.Q38, DefaultValue.Q38));
     response.setQ3901(readInteger(record, Field.Q3901, DefaultValue.Q3901));
     response.setQ3902(readInteger(record, Field.Q3902, DefaultValue.Q3902));
     response.setQ3903(readInteger(record, Field.Q3903, DefaultValue.Q3903));
@@ -540,13 +534,13 @@ public class Response {
     try {
       value = Integer.valueOf(recordStr.trim());
     } catch (NumberFormatException e) {
-      System.out.println("Invalid " + fieldName + " detected: ".concat(recordStr));
+      // System.out.println("Invalid " + fieldName + " detected: ".concat(recordStr));
     }
     return value;
   }
 
   private static String readString(CSVRecord record, String fieldName, String defaultValue) {
-    String recordStr = record.get(Field.AGE);
+    String recordStr = record.get(fieldName);
     return recordStr.isEmpty() ? recordStr : defaultValue;
   }
 
@@ -648,10 +642,10 @@ public class Response {
     public static final String Q4 = "q4";
     public static final String Q3 = "q3";
     public static final String Q2 = "q2";
-    public static final String Q1 = "q1";
+    public static final String WEEKDAY_BEDTIME = "q1";
     public static final String QS4 = "qs4";
     public static final String QS3 = "qs3";
-    public static final String QS2 = "qs2";
+    public static final String WEEKDAY_AWAKE_TIME = "qs2";
     public static final String QS1 = "qs1";
     public static final String AGE = "age";
   }
@@ -753,8 +747,8 @@ public class Response {
     public static final int Q5 = 0;
     public static final int Q4 = 0;
     public static final int Q3 = 0;
-    public static final int Q2 = 0;
-    public static final int Q1 = 0;
+    public static final int WEEK_DAY_AWAKE_TIME = 0;
+    public static final int WEEKDAY_BEDTIME = 0;
     public static final String QS4 = "";
     public static final int QS3 = 0;
     public static final int QS2 = 0;
