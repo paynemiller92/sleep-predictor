@@ -1,22 +1,17 @@
 plugins {
     id 'java'
     id "io.freefair.lombok" version "5.3.0"
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 group 'edu.uncc.cci.chbm'
 version '1.0'
 
-task fatJar(type: Jar) {
+shadowJar {
+    zip64 = true
     manifest {
-        attributes 'Implementation-Title': 'Sleep Predictor',
-                'Implementation-Version': version,
-                'Main-Class': 'SleepPredictor'
+        attributes 'Main-Class': 'SleepPredictor'
     }
-    baseName = project.name
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-    with jar
 }
 
 repositories {
@@ -27,6 +22,7 @@ dependencies {
     implementation group: 'org.apache.spark', name: 'spark-mllib_2.12', version: '3.1.1'
     implementation group: 'org.apache.spark', name: 'spark-core_2.12', version: '3.1.1'
     implementation group: 'org.apache.spark', name: 'spark-sql_2.12', version: '3.1.1'
+    implementation group: 'org.jfree', name: 'jfreechart', version: '1.5.3'
     compileOnly 'org.projectlombok:lombok:1.18.16'
     implementation group: 'org.apache.commons', name: 'commons-csv', version: '1.8'
     annotationProcessor 'org.projectlombok:lombok:1.18.16'

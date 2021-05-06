@@ -29,15 +29,33 @@ public class SleepPredictorEngine {
             .map(response -> (double) response.getAverageHoursOfModerateExercisePerWeekday())
             .collect(Collectors.toList());
 
-    List sleepHours = questionnaireResponses.stream()
-            .map(response -> (double) response.getAverageHoursOfSleepPerWeekday())
-            .collect(Collectors.toList());
+    List sleepHours = getSleepHours(questionnaireResponses);
 
     JavaRDD<Double> xSeries = spark.parallelize(exerciseHours);
     JavaRDD<Double> ySeries = spark.parallelize(sleepHours);
 
     double correlation = Statistics.corr(xSeries, ySeries, "pearson");
     return correlation;
+  }
+
+  public double correlateNapsToSleep(List<Response> questionnaireResponses) {
+    List napTime = questionnaireResponses.stream()
+            .map(response -> (double) response.getAverageWeekdayNapInMinutes())
+            .collect(Collectors.toList());
+
+    List sleepHours = getSleepHours(questionnaireResponses);
+
+    JavaRDD<Double> xSeries = spark.parallelize(napTime);
+    JavaRDD<Double> ySeries = spark.parallelize(sleepHours);
+
+    double correlation = Statistics.corr(xSeries, ySeries, "pearson");
+    return correlation;
+  }
+
+  private List getSleepHours(List<Response> questionnaireResponses) {
+    return questionnaireResponses.stream()
+            .map(response -> (double) response.getAverageHoursOfSleepPerWeekday())
+            .collect(Collectors.toList());
   }
 
   public double predictSleep(List<Response> questionnaireResponses) {

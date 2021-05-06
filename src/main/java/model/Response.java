@@ -11,35 +11,35 @@ public class Response {
 
   @Getter
   @Setter
-  private int weekDayBedtime;
+  private int doesHouseholdContainMiddleAgedAdults;
 
   @Getter
   @Setter
-  private int qs2;
+  private int employmentStatus; // TODO: make an enum to hold this value.
 
   @Getter
   @Setter
-  private int qs3;
+  private int gender; // TODO: make an enum to hold this value.
 
   @Getter
   @Setter
-  private String qs4;
+  private String stateOfResidence;
 
   @Getter
   @Setter
-  private int q1;
+  private int weekdayBedtime;
 
   @Getter
   @Setter
-  private int q2;
+  private int weekdayWakeUpTime;
 
   @Getter
   @Setter
-  private int q3;
+  private int weekendBedtime;
 
   @Getter
   @Setter
-  private int q4;
+  private int weekendWakeUpTime;
 
   @Getter
   @Setter
@@ -47,63 +47,63 @@ public class Response {
 
   @Getter
   @Setter
-  private int q6;
+  private int averageHoursOfSleepPerWeekendDay;
 
   @Getter
   @Setter
-  private int q7;
+  private int numberOfWeekdayNapsWithinPastTwoWeeks;
 
   @Getter
   @Setter
-  private int q8;
+  private int averageWeekdayNapInMinutes;
 
   @Getter
   @Setter
-  private int q9;
+  private int numberOfWeekendNapsWithinPastTwoWeeks;
 
   @Getter
   @Setter
-  private int q10;
+  private int averageWeekendNapInMinutes;
 
   @Getter
   @Setter
-  private int q11;
+  private int weekdayFrequencyOfGoodNightsSleep; // TODO: use enum
 
   @Getter
   @Setter
-  private int q12;
+  private int weekendFrequencyOfGoodNightsSleep; // TODO: use enum
 
   @Getter
   @Setter
-  private int q13a;
+  private int chanceOfDozingWhileReading; // TODO: use enum
 
   @Getter
   @Setter
-  private int q13b;
+  private int chanceOfDozingWhileWatchingTelevision; // TODO: use enum
 
   @Getter
   @Setter
-  private int q13c;
+  private int chancesOfDozingWhileDriving; // TODO: use enum
 
   @Getter
   @Setter
-  private int q13d;
+  private int chancesOfDozingWhileRidingAsPassenger; // TODO: use num
 
   @Getter
   @Setter
-  private int q13e;
+  private int chancesOfDozingDuringConversation; // TODO: use enum
 
   @Getter
   @Setter
-  private int q13f;
+  private int chancesOfDozingAfterLunch; // TODO: use enum
 
   @Getter
   @Setter
-  private int q13g;
+  private int chancesOfDozingWhileLayingDown; // TODO: use enum
 
   @Getter
   @Setter
-  private int q14;
+  private int optimalHoursOfSleep; // TODO: use enum
 
   @Getter
   @Setter
@@ -421,30 +421,30 @@ public class Response {
   public static Response fromCsvRecord(CSVRecord record) {
     Response response = new Response();
     response.setAge(readInteger(record, Field.AGE, DefaultValue.AGE));
-    response.setWeekDayBedtime(readInteger(record, Field.QS1, DefaultValue.QS1));
-    response.setQs2(readInteger(record, Field.WEEKDAY_AWAKE_TIME, DefaultValue.QS2));
-    response.setQs3(readInteger(record, Field.QS3, DefaultValue.QS3));
-    response.setQs4(readString(record, Field.QS4, DefaultValue.QS4));
-    response.setQ1(readInteger(record, Field.WEEKDAY_BEDTIME, DefaultValue.WEEKDAY_BEDTIME));
-    response.setQ2(readInteger(record, Field.Q2, DefaultValue.WEEK_DAY_AWAKE_TIME));
-    response.setQ3(readInteger(record, Field.Q3, DefaultValue.Q3));
-    response.setQ4(readInteger(record, Field.Q4, DefaultValue.Q4));
+    response.setDoesHouseholdContainMiddleAgedAdults(readInteger(record, Field.QS1, DefaultValue.QS1));
+    response.setEmploymentStatus(readInteger(record, Field.WEEKDAY_AWAKE_TIME, DefaultValue.QS2));
+    response.setGender(readInteger(record, Field.QS3, DefaultValue.QS3));
+    response.setStateOfResidence(readString(record, Field.QS4, DefaultValue.QS4));
+    response.setWeekdayBedtime(readInteger(record, Field.WEEKDAY_BEDTIME, DefaultValue.WEEKDAY_BEDTIME));
+    response.setWeekdayWakeUpTime(readInteger(record, Field.Q2, DefaultValue.WEEK_DAY_AWAKE_TIME));
+    response.setWeekendBedtime(readInteger(record, Field.Q3, DefaultValue.Q3));
+    response.setWeekendWakeUpTime(readInteger(record, Field.Q4, DefaultValue.Q4));
     response.setAverageHoursOfSleepPerWeekday(readInteger(record, Field.Q5, DefaultValue.Q5));
-    response.setQ6(readInteger(record, Field.Q6, DefaultValue.Q6));
-    response.setQ7(readInteger(record, Field.Q7, DefaultValue.Q7));
-    response.setQ8(readInteger(record, Field.Q8, DefaultValue.Q8));
-    response.setQ9(readInteger(record, Field.Q9, DefaultValue.Q9));
-    response.setQ10(readInteger(record, Field.Q10, DefaultValue.Q10));
-    response.setQ11(readInteger(record, Field.Q11, DefaultValue.Q11));
-    response.setQ12(readInteger(record, Field.Q12, DefaultValue.Q12));
-    response.setQ13a(readInteger(record, Field.Q13a, DefaultValue.Q13a));
-    response.setQ13b(readInteger(record, Field.Q13b, DefaultValue.Q13b));
-    response.setQ13c(readInteger(record, Field.Q13c, DefaultValue.Q13c));
-    response.setQ13d(readInteger(record, Field.Q13d, DefaultValue.Q13d));
-    response.setQ13e(readInteger(record, Field.Q13e, DefaultValue.Q13e));
-    response.setQ13f(readInteger(record, Field.Q13f, DefaultValue.Q13f));
-    response.setQ13g(readInteger(record, Field.Q13g, DefaultValue.Q13g));
-    response.setQ14(readInteger(record, Field.Q14, DefaultValue.Q14));
+    response.setAverageHoursOfSleepPerWeekendDay(readInteger(record, Field.Q6, DefaultValue.Q6));
+    response.setNumberOfWeekdayNapsWithinPastTwoWeeks(readInteger(record, Field.Q7, DefaultValue.Q7));
+    response.setAverageWeekdayNapInMinutes(readInteger(record, Field.Q8, DefaultValue.Q8));
+    response.setNumberOfWeekendNapsWithinPastTwoWeeks(readInteger(record, Field.Q9, DefaultValue.Q9));
+    response.setAverageWeekendNapInMinutes(readInteger(record, Field.Q10, DefaultValue.Q10));
+    response.setWeekdayFrequencyOfGoodNightsSleep(readInteger(record, Field.Q11, DefaultValue.Q11));
+    response.setWeekendFrequencyOfGoodNightsSleep(readInteger(record, Field.Q12, DefaultValue.Q12));
+    response.setChanceOfDozingWhileReading(readInteger(record, Field.Q13a, DefaultValue.Q13a));
+    response.setChanceOfDozingWhileWatchingTelevision(readInteger(record, Field.Q13b, DefaultValue.Q13b));
+    response.setChancesOfDozingWhileDriving(readInteger(record, Field.Q13c, DefaultValue.Q13c));
+    response.setChancesOfDozingWhileRidingAsPassenger(readInteger(record, Field.Q13d, DefaultValue.Q13d));
+    response.setChancesOfDozingDuringConversation(readInteger(record, Field.Q13e, DefaultValue.Q13e));
+    response.setChancesOfDozingAfterLunch(readInteger(record, Field.Q13f, DefaultValue.Q13f));
+    response.setChancesOfDozingWhileLayingDown(readInteger(record, Field.Q13g, DefaultValue.Q13g));
+    response.setOptimalHoursOfSleep(readInteger(record, Field.Q14, DefaultValue.Q14));
     response.setQ15(readInteger(record, Field.Q15, DefaultValue.Q15));
     response.setQ16a(readInteger(record, Field.Q16a, DefaultValue.Q16a));
     response.setQ16c(readInteger(record, Field.Q16c, DefaultValue.Q16c));

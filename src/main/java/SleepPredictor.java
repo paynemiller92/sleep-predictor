@@ -7,12 +7,10 @@ import org.apache.spark.api.java.JavaSparkContext;
 import reader.QuestionnaireReader;
 
 import java.io.File;
-import java.net.URL;
 import java.util.List;
+import java.util.Scanner;
 
 public class SleepPredictor {
-  private static final String FILE_NAME = "questionnaire.csv";
-
   public static void main(String[] args) {
     List<Response> responses = loadResponses();
     runAnalyticalCalculations(responses);
@@ -20,8 +18,10 @@ public class SleepPredictor {
   }
 
   private static List<Response> loadResponses() {
-    URL fileLocation = ClassLoader.getSystemClassLoader().getResource(FILE_NAME);
-    File file = new File(fileLocation.getFile());
+    Scanner keyboard = new Scanner(System.in);
+    System.out.println("Please enter the path to your questionnaire file! (.csv)");
+    String pathToQuestionnaire = keyboard.nextLine();
+    File file = new File(pathToQuestionnaire);
     return new QuestionnaireReader().readFile(file);
   }
 
@@ -38,18 +38,14 @@ public class SleepPredictor {
     SparkConf sparkConf = new SparkConf().setAppName("JavaDirectKafkaWordCount").setMaster("local");
     JavaSparkContext javaSparkContext = new JavaSparkContext(sparkConf);
     SleepPredictorEngine engine = SleepPredictorEngine.withContext(javaSparkContext);
-    double trainingCorrelation = calculateCorrelation(engine, responses.subList(0, 100));
-    double testCorrelation = calculateCorrelation(engine, responses);
+    double trainingCorrelation = calculateExerciseToSleepCorrelation(engine, responses.subList(0, 100));
+    double testCorrelation = calculateExerciseToSleepCorrelation(engine, responses);
 
     System.out.println("Training Set Pearson correlation: " + trainingCorrelation);
     System.out.println("Test Set Pearson correlation: " + testCorrelation);
-
-//    double testPrediction = calculateRegression(engine, responses);
-//
-//    System.out.println("Test Set r2 value: " + testPrediction);
   }
 
-  private static double calculateCorrelation(SleepPredictorEngine engine, List<Response> responses) {
+  private static double calculateExerciseToSleepCorrelation(SleepPredictorEngine engine, List<Response> responses) {
     return engine.correlateExerciseToSleep(responses);
   }
 
