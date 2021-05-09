@@ -38,18 +38,24 @@ public class SleepPredictor {
     SparkConf sparkConf = new SparkConf().setAppName("JavaDirectKafkaWordCount").setMaster("local");
     JavaSparkContext javaSparkContext = new JavaSparkContext(sparkConf);
     SleepPredictorEngine engine = SleepPredictorEngine.withContext(javaSparkContext);
-    double trainingCorrelation = calculateExerciseToSleepCorrelation(engine, responses.subList(0, 100));
-    double testCorrelation = calculateExerciseToSleepCorrelation(engine, responses);
+
+    calculateExerciseToSleepCorrelation(engine, responses);
+    calculateNaptimeToSleepCorrelation(engine, responses);
+  }
+
+  private static void calculateExerciseToSleepCorrelation(SleepPredictorEngine engine, List<Response> responses) {
+    double trainingCorrelation = engine.correlateExerciseToSleep(responses.subList(0, 100));
+    double testCorrelation = engine.correlateExerciseToSleep(responses);
 
     System.out.println("Training Set Pearson correlation: " + trainingCorrelation);
     System.out.println("Test Set Pearson correlation: " + testCorrelation);
   }
 
-  private static double calculateExerciseToSleepCorrelation(SleepPredictorEngine engine, List<Response> responses) {
-    return engine.correlateExerciseToSleep(responses);
-  }
+  private static void calculateNaptimeToSleepCorrelation(SleepPredictorEngine engine, List<Response> responses) {
+    double trainingCorrelation = engine.correlateNapsToSleep(responses.subList(0, 100));
+    double testCorrelation = engine.correlateNapsToSleep(responses);
 
-  private static double calculateRegression(SleepPredictorEngine engine, List<Response> response) {
-    return engine.predictSleep(response);
+    System.out.println("Training Set Nap-to-Sleep Pearson correlation: " + trainingCorrelation);
+    System.out.println("Test Set Nap-to-Sleep Pearson correlation: " + testCorrelation);
   }
 }
