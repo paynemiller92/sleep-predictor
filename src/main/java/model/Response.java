@@ -187,7 +187,7 @@ public class Response {
 
   @Getter
   @Setter
-  private int q28;
+  private int numberOfDrinksConsumed;
 
   @Getter
   @Setter
@@ -291,7 +291,7 @@ public class Response {
 
   @Getter
   @Setter
-  private int q43b;
+  private int minutesOfComputerTime;
 
   @Getter
   @Setter
@@ -465,7 +465,7 @@ public class Response {
     response.setQ25(readInteger(record, Field.Q25, DefaultValue.Q25));
     response.setQ26(readInteger(record, Field.Q26, DefaultValue.Q26));
     response.setQ27(readInteger(record, Field.Q27, DefaultValue.Q27));
-    response.setQ28(readInteger(record, Field.Q28, DefaultValue.Q28));
+    response.setNumberOfDrinksConsumed(readInteger(record, Field.Q28, DefaultValue.Q28));
     response.setQ29a(readInteger(record, Field.Q29a, DefaultValue.Q29a));
     response.setQ29b(readInteger(record, Field.Q29b, DefaultValue.Q29b));
     response.setQ29c(readInteger(record, Field.Q29c, DefaultValue.Q29c));
@@ -491,7 +491,7 @@ public class Response {
     response.setQ4104(readInteger(record, Field.Q4104, DefaultValue.Q4104));
     response.setQ42(readInteger(record, Field.Q42, DefaultValue.Q42));
     response.setQ43a(readInteger(record, Field.Q43a, DefaultValue.Q43a));
-    response.setQ43b(readInteger(record, Field.Q43b, DefaultValue.Q43b));
+    response.setMinutesOfComputerTime(readInteger(record, Field.Q43b, DefaultValue.Q43b));
     response.setQ43c(readInteger(record, Field.Q43c, DefaultValue.Q43c));
     response.setQ43d(readInteger(record, Field.Q43d, DefaultValue.Q43d));
     response.setQ43e(readInteger(record, Field.Q43e, DefaultValue.Q43e));

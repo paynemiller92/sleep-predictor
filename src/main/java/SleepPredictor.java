@@ -41,6 +41,7 @@ public class SleepPredictor {
 
     calculateExerciseToSleepCorrelation(engine, responses);
     calculateNaptimeToSleepCorrelation(engine, responses);
+    calculateScreentimeToSleepCorrelation(engine, responses);
   }
 
   private static void calculateExerciseToSleepCorrelation(SleepPredictorEngine engine, List<Response> responses) {
@@ -57,5 +58,13 @@ public class SleepPredictor {
 
     System.out.println("Training Set Nap-to-Sleep Pearson correlation: " + trainingCorrelation);
     System.out.println("Test Set Nap-to-Sleep Pearson correlation: " + testCorrelation);
+  }
+
+  private static void calculateScreentimeToSleepCorrelation(SleepPredictorEngine engine, List<Response> responses) {
+    double trainingCorrelation = engine.correlateScreentimeToSleep(responses.subList(0, 100));
+    double testCorrelation = engine.correlateScreentimeToSleep(responses);
+
+    System.out.println("Training Set Screentime-to-Sleep Pearson correlation: " + trainingCorrelation);
+    System.out.println("Test Set Screentime-to-Sleep Pearson correlation: " + testCorrelation);
   }
 }
