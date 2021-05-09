@@ -6,6 +6,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.mllib.stat.Statistics;
 
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class SleepPredictorEngine {
@@ -59,6 +60,32 @@ public class SleepPredictorEngine {
 
     double correlation = Statistics.corr(xSeries, ySeries, "pearson");
     return correlation;
+  }
+
+  public boolean predictSleepQuality(double exerciseCorrelation, double napCorrelation, double screenTimeCorrelation) {
+    boolean isGoodSleepLikely;
+    double baselineExerciseMinutes = 60.0;
+    double baselineNappingMinutes = 15.0;
+    double baselineScreenTime = 180;
+    double baselineScore = (baselineScreenTime * screenTimeCorrelation) +
+            (baselineNappingMinutes * napCorrelation) +
+            (baselineExerciseMinutes * exerciseCorrelation);
+    Scanner keyboard = new Scanner(System.in);
+
+    System.out.println("How many minutes do you exercise (on average) on a weekday?");
+    double exderciseMinutes = keyboard.nextDouble();
+
+    System.out.println("How many minutes do you nap (on average) on a weekday?");
+    double napMinutes = keyboard.nextDouble();
+
+    System.out.println("How many minutes do you use an electronic screen (on average) on a weekday?");
+    double screenTime = keyboard.nextDouble();
+
+    double actualScore = (screenTime * screenTimeCorrelation) +
+            (napMinutes * napCorrelation) +
+            (exderciseMinutes * exerciseCorrelation);
+    isGoodSleepLikely = baselineScore < actualScore;
+    return isGoodSleepLikely;
   }
 
   private List getSleepHours(List<Response> questionnaireResponses) {

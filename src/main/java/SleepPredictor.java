@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SleepPredictor {
+  private static double exerciseCorrleation = 0.0;
+  private static double naptimeCorrleation = 0.0;
+  private static double screentimeCorrleation = 0.0;
+
   public static void main(String[] args) {
     List<Response> responses = loadResponses();
     runAnalyticalCalculations(responses);
@@ -42,6 +46,9 @@ public class SleepPredictor {
     calculateExerciseToSleepCorrelation(engine, responses);
     calculateNaptimeToSleepCorrelation(engine, responses);
     calculateScreentimeToSleepCorrelation(engine, responses);
+    boolean sleepPrediction = engine.predictSleepQuality(exerciseCorrleation, naptimeCorrleation, screentimeCorrleation);
+    String prediction = "You " + (sleepPrediction ? "will" : "will not") + " get a good night sleep!";
+    System.out.println(prediction);
   }
 
   private static void calculateExerciseToSleepCorrelation(SleepPredictorEngine engine, List<Response> responses) {
@@ -50,6 +57,7 @@ public class SleepPredictor {
 
     System.out.println("Training Set Pearson correlation: " + trainingCorrelation);
     System.out.println("Test Set Pearson correlation: " + testCorrelation);
+    exerciseCorrleation = testCorrelation;
   }
 
   private static void calculateNaptimeToSleepCorrelation(SleepPredictorEngine engine, List<Response> responses) {
@@ -58,6 +66,7 @@ public class SleepPredictor {
 
     System.out.println("Training Set Nap-to-Sleep Pearson correlation: " + trainingCorrelation);
     System.out.println("Test Set Nap-to-Sleep Pearson correlation: " + testCorrelation);
+    naptimeCorrleation = testCorrelation;
   }
 
   private static void calculateScreentimeToSleepCorrelation(SleepPredictorEngine engine, List<Response> responses) {
@@ -66,5 +75,6 @@ public class SleepPredictor {
 
     System.out.println("Training Set Screentime-to-Sleep Pearson correlation: " + trainingCorrelation);
     System.out.println("Test Set Screentime-to-Sleep Pearson correlation: " + testCorrelation);
+    screentimeCorrleation = testCorrelation;
   }
 }
