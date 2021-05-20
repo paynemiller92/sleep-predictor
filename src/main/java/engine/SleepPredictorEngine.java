@@ -9,6 +9,11 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+/**
+ * This class runs the Apache Spark methods to produce the Pearson's
+ * Correlation in addition to promptimg the user for their input values
+ * and predicting a good night's sleep off of that data.
+ */
 public class SleepPredictorEngine {
   private JavaSparkContext spark;
 
@@ -22,7 +27,7 @@ public class SleepPredictorEngine {
 
   public double correlateExerciseToSleep(List<Response> questionnaireResponses) {
     List exerciseHours = questionnaireResponses.stream()
-            .map(response -> (double) response.getAverageHoursOfModerateExercisePerWeekday())
+            .map(response -> (double) response.getAverageMinutesOfModerateExercisePerWeekday())
             .collect(Collectors.toList());
 
     List sleepHours = getSleepHours(questionnaireResponses);

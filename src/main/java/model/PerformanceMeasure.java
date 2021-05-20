@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * This class is a data encapsulation class
+ * that represents a performance measure created
+ * by {@link engine.SleepExerciseAnalyzer}. It holds
+ * two properties: accuracy and precision.
+ */
 public class PerformanceMeasure {
   private Double accuracy;
   private Double precision;

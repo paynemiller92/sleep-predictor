@@ -5,8 +5,16 @@ import model.Response;
 
 import java.util.List;
 
+/**
+ * This class calculates the accuracy and precision
+ * of our initial models used in predicting getting
+ * a good night's sleep.
+ *
+ * The baseline minutes of moderate exercise is ten
+ * minutes and the baseline for a good night's sleep
+ * is seven hours.
+ */
 public class SleepExerciseAnalyzer {
-
   public PerformanceMeasure calculatePerformance(List<Response> questionnaireResponses) {
   Double numberOfTruePositives = 0.0;
   Double numberOfFalsePositives = 0.0;
@@ -14,7 +22,7 @@ public class SleepExerciseAnalyzer {
   Double numberOfFalseNegatives = 0.0;
 
     for (Response response : questionnaireResponses) {
-      boolean isExercising = response.getAverageHoursOfModerateExercisePerWeekday() > 10.0;
+      boolean isExercising = response.getAverageMinutesOfModerateExercisePerWeekday() > 10.0;
       boolean isSleepingMoreThanAverage = response.getAverageHoursOfSleepPerWeekday() > 7.0;
       if (isExercising) {
         if (isSleepingMoreThanAverage) {

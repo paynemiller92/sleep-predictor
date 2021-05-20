@@ -10,6 +10,11 @@ import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * This is the main class that has the executable main function.
+ * This class could be considered the "glue" or the brains that
+ * runs all the components and produces the output.
+ */
 public class SleepPredictor {
   private static double exerciseCorrleation = 0.0;
   private static double naptimeCorrleation = 0.0;

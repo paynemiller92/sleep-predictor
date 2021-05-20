@@ -8,8 +8,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class reads in the Questionnaire responses that are recorded
+ * in the questionnaire.csv file found under the resources directory.
+ * Using {@link CSVRecord} from Apache, wew convert each row into a
+ * {@link Response} object.
+ */
 public class QuestionnaireReader {
-
   public List<Response> readFile(File file) {
     List<Response> responses = new ArrayList<>();
     try {

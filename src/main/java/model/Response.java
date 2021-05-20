@@ -4,6 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.csv.CSVRecord;
 
+/**
+ * Custom model that houses the responses to the Sleep Foundation's
+ * 2013 Sleep Study Questionnaire data. This is parsed using Apache's
+ * {@link CSVRecord} library.
+ */
 public class Response {
   @Getter
   @Setter
@@ -247,7 +252,7 @@ public class Response {
 
   @Getter
   @Setter
-  private int averageHoursOfModerateExercisePerWeekday;
+  private int averageMinutesOfModerateExercisePerWeekday;
 
   @Getter
   @Setter
@@ -480,7 +485,7 @@ public class Response {
     response.setQ3701(readInteger(record, Field.Q3701, DefaultValue.Q3701));
     response.setQ3702(readInteger(record, Field.Q3702, DefaultValue.Q3702));
     response.setQ3703(readInteger(record, Field.Q3703, DefaultValue.Q3703));
-    response.setAverageHoursOfModerateExercisePerWeekday(readInteger(record, Field.Q38, DefaultValue.Q38));
+    response.setAverageMinutesOfModerateExercisePerWeekday(readInteger(record, Field.Q38, DefaultValue.Q38));
     response.setQ3901(readInteger(record, Field.Q3901, DefaultValue.Q3901));
     response.setQ3902(readInteger(record, Field.Q3902, DefaultValue.Q3902));
     response.setQ3903(readInteger(record, Field.Q3903, DefaultValue.Q3903));
